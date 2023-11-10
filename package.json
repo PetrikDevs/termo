@@ -1,0 +1,16 @@
+{
+  "name": "termo",
+  "version": "1.0.0",
+  "description": "távolral irányitható legyen     manuálisan 5",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc"
+  },  
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2"
+  }
+}
