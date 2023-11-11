@@ -1,7 +1,7 @@
 {
   "name": "termo",
   "version": "1.0.0",
-  "description": "távolral irányitható legyen     manuálisan 5",
+  "description": ":D",
   "main": "index.js",
   "scripts": {
     "start": "node dist/index.js",
