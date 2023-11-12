@@ -16,6 +16,10 @@ const connectToDB = async (dbConfig: DBConfig): Promise<Client> =>{
     return client;
 }
 
+const disconnectFromDB = async (client: Client) => {
+    await client.end();
+}
+
 const saveTestToDB = async (client: Client, test: Test) => {
     await client.query(`
         INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, tested_at)
@@ -35,10 +39,9 @@ const q = async (client: Client, query: string) => {
     return res;
 }
 
-
-
 export {
     connectToDB,
+    disconnectFromDB,
     saveTestToDB,
     saveTestOxigToDB,
     q
