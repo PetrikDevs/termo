@@ -1,6 +1,6 @@
 import { Client } from 'ts-postgres';
 import { DBConfig } from '../config/db_config';
-import { Test, TestOxig } from '../types/tests';
+import { Test, TestOxig } from '../model/tests';
 
 const connectToDB = async (dbConfig: DBConfig): Promise<Client> =>{
     const client = new Client({
