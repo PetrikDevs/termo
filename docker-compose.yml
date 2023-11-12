@@ -13,7 +13,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db
+      - termo-db
   termo-db:
     networks:
       - termo-network
