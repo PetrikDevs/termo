@@ -7,7 +7,7 @@ const connectToDB = async (dbConfig: DBConfig): Promise<Client> =>{
         host: dbConfig.host,
         port: dbConfig.port,
         database: dbConfig.database,
-        user: dbConfig.username,
+        user: dbConfig.user,
         password: dbConfig.password
     });
 
