@@ -22,8 +22,14 @@ export class TestsController {
         try {
             const client = await connectToDB(dbConfig);
             console.log(req.body);
-            const test: Test = req.body as Test;
-            console.log(test);
+            const test: Test = {
+                id: 0,
+                temp_flow_in: req.body.temp_flow_in,
+                temp_flow_out: req.body.temp_flow_out,
+                temp_out_side: req.body.temp_out_side,
+                temp_in_side: req.body.temp_in_side,
+                tested_at: new Date()
+            };
             await saveTestToDB(client, test);
             await client.end();
             res.json({ data: test });
