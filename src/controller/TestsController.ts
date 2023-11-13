@@ -21,7 +21,9 @@ export class TestsController {
     public async createTest(req: Request, res: Response) {
         try {
             const client = await connectToDB(dbConfig);
+            console.log(req.body);
             const test: Test = req.body as Test;
+            console.log(test);
             await saveTestToDB(client, test);
             await client.end();
             res.json({ data: test });
