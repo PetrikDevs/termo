@@ -1,0 +1,29 @@
+{
+    "temp_flow_in": 60,
+    "temp_flow_out": 60,
+    "temp_out_side": 60,
+    "temp_in_side": 70,
+    "test":{
+        "sec0":{
+            "sensor0": 50,
+            "sensor1": 50,
+            "sensor2": 50,
+            "sensor3": 50,
+            "sensor4": 50
+        },
+        "sec1": {
+            "sensor0": 50,
+            "sensor1": 50,
+            "sensor2": 50,
+            "sensor3": 50,
+            "sensor4": 50
+        },
+        "sec2": {
+            "sensor0": 50,
+            "sensor1": 50,
+            "sensor2": 50,
+            "sensor3": 50,
+            "sensor4": 50
+        }
+    }
+}

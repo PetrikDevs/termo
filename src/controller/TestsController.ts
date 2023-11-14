@@ -22,6 +22,7 @@ export class TestsController {
         try {
             const client = await connectToDB(dbConfig);
             console.log(req.body);
+            const matrix = req.body.matrix; 
             const test: Test = {
                 id: 0,
                 temp_flow_in: req.body.temp_flow_in,

@@ -1,6 +1,12 @@
-távolral irányitható legyen
-    manuálisan 5
-    
+# Termo backer
+
+> Elérhető funkciók
+
+- Motor control 
+
+
+"távolral irányitható legyen
+    manuálisan 5    
     előre def 3
         belső 
         kulső
@@ -26,4 +32,4 @@ data anal
     be--ki-vizhő
     pingpong hő
     locsolás date
-    oxigén tartalom
+    oxigén tartalom"
