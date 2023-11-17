@@ -1,5 +1,3 @@
-import e from "express";
-
 type Senzor_m = {
     id: number;
     sec1:{

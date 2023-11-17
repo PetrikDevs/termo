@@ -1,5 +1,3 @@
-import e from "express";
-
 interface DBConfig {
     host: string;
     port: number;
