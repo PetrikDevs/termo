@@ -5,3 +5,7 @@ type Motors = {
     "mot3": boolean;
     "mot4": boolean;
 };
+
+export {
+    Motors
+};
