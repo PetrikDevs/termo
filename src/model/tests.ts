@@ -4,6 +4,7 @@ type Test = {
     temp_flow_out: number;
     temp_out_side: number;
     temp_in_side: number;
+    test_id: number;
     tested_at: Date;
 };
 

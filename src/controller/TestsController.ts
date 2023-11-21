@@ -22,13 +22,16 @@ export class TestsController {
         try {
             const client = await connectToDB(dbConfig);
             console.log(req.body);
-            const matrix = req.body.matrix; 
+            const matrix = req.body.test;
+            //save matrix to db
+
             const test: Test = {
                 id: 0,
                 temp_flow_in: req.body.temp_flow_in,
                 temp_flow_out: req.body.temp_flow_out,
                 temp_out_side: req.body.temp_out_side,
                 temp_in_side: req.body.temp_in_side,
+                test_id: 0,//TODO
                 tested_at: new Date()
             };
             await saveTestToDB(client, test);
