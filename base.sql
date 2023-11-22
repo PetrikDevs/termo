@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS tests (
     temp_flow_out INTEGER,
     temp_out_side INTEGER,
     temp_in_side INTEGER,
+    temp_matrix INTEGER,
     tested_at TIMESTAMP NOT NULL
 );
 
