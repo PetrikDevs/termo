@@ -23,6 +23,8 @@ export class TestsController {
             const client = await connectToDB(dbConfig);
             console.log(req.body);
             const matrix = req.body.test;
+
+            console.log(matrix);
             //save matrix to db
 
             const test: Test = {

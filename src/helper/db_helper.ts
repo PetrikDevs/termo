@@ -1,6 +1,7 @@
 import { Client } from 'ts-postgres';
 import { DBConfig } from '../config/db_config';
 import { Test, TestOxig } from '../model/tests';
+import { Senzor_m } from '../model/sensor_m';
 
 const connectToDB = async (dbConfig: DBConfig): Promise<Client> =>{
     const client = new Client({
@@ -25,6 +26,9 @@ const saveTestToDB = async (client: Client, test: Test) => {
         INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, tested_at)
         VALUES (${test.temp_flow_in}, ${test.temp_flow_out}, ${test.temp_out_side}, ${test.temp_in_side}, '${test.tested_at.toISOString()}')
     `);
+}
+
+const saveSensorToDB = async (client: Client, sensor: Senzor_m) => {
 }
 
 const saveTestOxigToDB = async (client: Client, test: TestOxig) => {

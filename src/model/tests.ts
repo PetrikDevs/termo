@@ -1,5 +1,4 @@
 type Test = {
-    id: number;
     temp_flow_in: number;
     temp_flow_out: number;
     temp_out_side: number;
@@ -9,8 +8,13 @@ type Test = {
 };
 
 type TestOxig = {
-    id: number;
     oxig: number;
+    tested_at: Date;
+};
+
+type TestVapour = {
+    vapour0: number;
+    vapour1: number;
     tested_at: Date;
 };
 
