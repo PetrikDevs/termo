@@ -1,9 +1,11 @@
+import { Value } from "ts-postgres";
+
 type Test = {
     temp_flow_in: number;
     temp_flow_out: number;
     temp_out_side: number;
     temp_in_side: number;
-    test_id: number;
+    test_id: Value;
     tested_at: Date;
 };
 
@@ -20,6 +22,7 @@ type TestVapour = {
 
 export {
     Test,
-    TestOxig
+    TestOxig,
+    TestVapour
 };
 

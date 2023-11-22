@@ -23,13 +23,26 @@ const disconnectFromDB = async (client: Client) => {
 
 const saveTestToDB = async (client: Client, test: Test) => {
     await client.query(`
-        INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, tested_at)
-        VALUES (${test.temp_flow_in}, ${test.temp_flow_out}, ${test.temp_out_side}, ${test.temp_in_side}, '${test.tested_at.toISOString()}')
+        INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, tested_at, term_matrix)
+        VALUES (${test.temp_flow_in}, ${test.temp_flow_out}, ${test.temp_out_side}, ${test.temp_in_side}, '${test.tested_at.toISOString()}', ${test.test_id})
     `);
 }
 
 const saveSensorToDB = async (client: Client, sensor: Senzor_m) => {
+    const result = await client.query(`
+        INSERT INTO term_matrix (sensor_00, sensor_01, sensor_02, sensor_03, sensor_04,
+                                sensor_10, sensor_11, sensor_12, sensor_13, sensor_14,
+                                sensor_20, sensor_21, sensor_22, sensor_23, sensor_24,
+                             tested_at)
+        VALUES (${sensor.sec0.sensor0}, ${sensor.sec0.sensor1}, ${sensor.sec0.sensor2}, ${sensor.sec0.sensor3}, ${sensor.sec0.sensor4},
+                ${sensor.sec1.sensor0}, ${sensor.sec1.sensor1}, ${sensor.sec1.sensor2}, ${sensor.sec1.sensor3}, ${sensor.sec1.sensor4},
+                ${sensor.sec2.sensor0}, ${sensor.sec2.sensor1}, ${sensor.sec2.sensor2}, ${sensor.sec2.sensor3}, ${sensor.sec2.sensor4},
+                '${sensor.tested_at.toISOString()}')
+        RETURNING id;
+    `);
+    return result.rows[0][0];
 }
+
 
 const saveTestOxigToDB = async (client: Client, test: TestOxig) => {
     await client.query(`
@@ -48,5 +61,6 @@ export {
     disconnectFromDB,
     saveTestToDB,
     saveTestOxigToDB,
+    saveSensorToDB,
     q
 };

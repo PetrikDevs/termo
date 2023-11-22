@@ -23,6 +23,11 @@ type Senzor_m = {
     tested_at: Date;
 };
 
+type Sensor_res = {
+    id: number;
+}
+
 export {
+    Sensor_res,
     Senzor_m
 };
