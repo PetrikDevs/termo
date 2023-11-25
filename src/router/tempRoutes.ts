@@ -5,6 +5,6 @@ const routerTemp = express.Router();
 const tempController = new TempController();
 
 routerTemp.get('/temp', tempController.getLastTest);
-//router.get('/tempall', tempController.getAllTests);
+routerTemp.get('/tempall', tempController.getAllTests);
 
 export default routerTemp;

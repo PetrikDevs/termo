@@ -21,5 +21,21 @@ export class TempController {
           }
     }
 
+    public async getAllTests(req: Request, res: Response) {
+        try {
+            const client = await connectToDB(dbConfig);
+            const result = await q(client, 'SELECT * FROM tests ORDER BY tested_at DESC');
+            const result2 = await q(client, `SELECT * FROM term_matrix WHERE id = ${result.rows[0][6]}`);
+            await client.end();
+            const test_list: SendBackTest[] = [];
+            for(let i = 0; i < result.rows.length; i++){
+                test_list.push(convertToTest(result.rows[i], result2.rows[i]));
+            }
 
+            res.json(test_list);
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+          }
+    }
 };

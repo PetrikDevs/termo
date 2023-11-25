@@ -44,6 +44,8 @@ type Test = {
     tested_at: Date;
 };
 
+type SendBackTestList = SendBackTest[];
+
 type SendBackTest = {
     temp_flow_in: Value;
     temp_flow_out: Value;
@@ -89,6 +91,7 @@ type TestVapour = {
 export {
     convertToTest,
     SendBackTest,
+    SendBackTestList,
     Test,
     TestOxig,
     TestVapour
