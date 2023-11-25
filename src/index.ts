@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
 import { json } from 'express';
-import testsRoutes from './router/testsRoutes';
+import router from './config/router_config';
 import cors from 'cors';
 
 dotenv.config();
@@ -17,7 +17,7 @@ app.use(cors(
 ));
 app.use(json());
 
-app.use(testsRoutes);
+app.use(router);
 
 
 app.listen(port, () => {

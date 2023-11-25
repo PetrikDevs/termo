@@ -10,7 +10,7 @@ const getMotors = async () => {
     }
 }
 
-const setMotor = async (motors: Motors[],) => {
+const setMotor = async (motors: Motors) => {
     try {
         const res = await axiosConfig.post('/motors', { motors });
         return res.data.data;

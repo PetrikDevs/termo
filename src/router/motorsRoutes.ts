@@ -1,11 +1,7 @@
 import { MotorsController } from '../controller/MotorsController';
-import express from 'express';
+import router from '../config/router_config';
 
-const router = express.Router();
 const testsController = new MotorsController();
 
 router.get('/motors', testsController.getMotors);
 router.post('/motors', testsController.setMotor);
-
-
-export default router;
