@@ -1,7 +1,9 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
 import { json } from 'express';
-import router from './config/router_config';
+import routerMotors from './router/motorsRoutes';
+import routerTest from './router/testsRoutes';
+import routerTemp from './router/tempRoutes';
 import cors from 'cors';
 
 dotenv.config();
@@ -17,8 +19,9 @@ app.use(cors(
 ));
 app.use(json());
 
-app.use(router);
-
+app.use(routerMotors);
+app.use(routerTest);
+app.use(routerTemp);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

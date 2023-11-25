@@ -1,7 +1,11 @@
+import e from 'express';
 import { TestsController } from '../controller/TestsController';
-import router from '../config/router_config';
+import express from 'express';
 
+const routerTest = express.Router();
 const testsController = new TestsController();
 
-router.get('/tests', testsController.getTests);
-router.post('/tests', testsController.createTest);
+routerTest.get('/tests', testsController.getTests);
+routerTest.post('/tests', testsController.createTest);
+
+export default routerTest;

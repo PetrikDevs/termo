@@ -1,7 +1,10 @@
 import { MotorsController } from '../controller/MotorsController';
-import router from '../config/router_config';
+import express from 'express';
 
-const testsController = new MotorsController();
+const routerMotors = express.Router();
+const motController = new MotorsController();
 
-router.get('/motors', testsController.getMotors);
-router.post('/motors', testsController.setMotor);
+routerMotors.get('/motors', motController.getMotors);
+routerMotors.post('/motors', motController.setMotor);
+
+export default routerMotors;

@@ -1,6 +1,10 @@
 import {TempController} from '../controller/TempController';
-import router from '../config/router_config';
+import express from 'express';
 
+const routerTemp = express.Router();
 const tempController = new TempController();
 
-router.get('/temp', tempController.getLastTest);
+routerTemp.get('/temp', tempController.getLastTest);
+//router.get('/tempall', tempController.getAllTests);
+
+export default routerTemp;
