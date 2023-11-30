@@ -54,7 +54,7 @@
 ## Post 
 
 ### {{Base}}/set_szelep
- > The server will call the endpoint and send the wanted stage of the motors
+ > The server will call the endpoint and send the wanted stage of the valves
 ```json
 {
     "szelep0": false,
