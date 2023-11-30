@@ -22,7 +22,7 @@ const getSzelep = async () => {
 
 const setSzelep = async (szelep: Szelep) => {
     try {
-        const res = await axiosConfig.post('/set_motors', { szelep });
+        const res = await axiosConfig.post('/set_szelep', { szelep });
         return res.data.data;
     } catch (error) {
         console.error(error);

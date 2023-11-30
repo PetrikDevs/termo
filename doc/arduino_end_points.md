@@ -7,11 +7,11 @@
 > gives back a simple json object, FALSE for closed "szelep", and TRUE for open "szelep"
 ```json
 {
-    "mot0": false,
-    "mot1": true,
-    "mot2": true,
-    "mot3": false,
-    "mot4": false
+    "szelep0": false,
+    "szelep1": true,
+    "szelep2": true,
+    "szelep3": false,
+    "szelep4": false
 }
 ```
 
@@ -53,14 +53,14 @@
 
 ## Post 
 
-### {{Base}}/set_motors
+### {{Base}}/set_szelep
  > The server will call the endpoint and send the wanted stage of the motors
 ```json
 {
-    "mot0": false,
-    "mot1": true,
-    "mot2": true,
-    "mot3": false,
-    "mot4": false
+    "szelep0": false,
+    "szelep1": true,
+    "szelep2": true,
+    "szelep3": false,
+    "szelep4": false
 }
 ```
