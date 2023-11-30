@@ -3,7 +3,7 @@
     In this document you can find all the end points that are callable
 
 ## GET 
-### {{Base}}/get_motors
+### {{Base}}/get_szelep
 > gives back a simple json object, FALSE for closed "szelep", and TRUE for open "szelep"
 ```json
 {

@@ -12,7 +12,7 @@ const getSzelep = async () => {
         }
         return szelep;
         /*
-        const res = await axiosConfig.get('/szelep');
+        const res = await axiosConfig.get('/get_szelep');
         return res.data.data;
         */
     } catch (error) {
@@ -22,7 +22,7 @@ const getSzelep = async () => {
 
 const setSzelep = async (szelep: Szelep) => {
     try {
-        const res = await axiosConfig.post('/szelep', { szelep });
+        const res = await axiosConfig.post('/set_motors', { szelep });
         return res.data.data;
     } catch (error) {
         console.error(error);
