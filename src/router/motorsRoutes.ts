@@ -1,10 +1,10 @@
-import { MotorsController } from '../controller/MotorsController';
+import { SzelepController } from '../controller/SzelepController';
 import express from 'express';
 
 const routerMotors = express.Router();
-const motController = new MotorsController();
+const szelepController = new SzelepController();
 
-routerMotors.get('/motors', motController.getMotors);
-routerMotors.post('/motors', motController.setMotor);
+routerMotors.get('/szelep', szelepController.getSzelep);
+routerMotors.post('/szelep', szelepController.setSzelep);
 
 export default routerMotors;

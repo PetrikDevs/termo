@@ -1,18 +1,18 @@
 import axiosConfig from "../config/axios_config";
-import { Motors } from "../model/motors";
+import { Szelep } from "../model/szelep";
 
-const getMotors = async () => {
+const getSzelep = async () => {
     try {
-        const motors: Motors = {
-            mot0: false,
-            mot1: false,
-            mot2: false,
-            mot3: false,
-            mot4: false
+        const szelep: Szelep = {
+            szelep0: false,
+            szelep1: false,
+            szelep2: false,
+            szelep3: false,
+            szelep4: false
         }
-        return motors;
+        return szelep;
         /*
-        const res = await axiosConfig.get('/motors');
+        const res = await axiosConfig.get('/szelep');
         return res.data.data;
         */
     } catch (error) {
@@ -20,9 +20,9 @@ const getMotors = async () => {
     }
 }
 
-const setMotor = async (motors: Motors) => {
+const setSzelep = async (szelep: Szelep) => {
     try {
-        const res = await axiosConfig.post('/motors', { motors });
+        const res = await axiosConfig.post('/szelep', { szelep });
         return res.data.data;
     } catch (error) {
         console.error(error);
@@ -30,6 +30,6 @@ const setMotor = async (motors: Motors) => {
 }
 
 export {
-    getMotors,
-    setMotor
+    getSzelep,
+    setSzelep
 };
