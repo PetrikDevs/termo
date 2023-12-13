@@ -1,5 +1,8 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
+import { dbConfig } from './config/db_config';
+import { connectToDB } from './helper/db_helper';
+import { db_init } from './helper/db_helper';
 import { json } from 'express';
 import routerMotors from './router/motorsRoutes';
 import routerTest from './router/testsRoutes';
@@ -18,6 +21,8 @@ app.use(cors(
   }
 ));
 app.use(json());
+
+connectToDB(dbConfig).then((client) => {db_init(client)});
 
 app.use(routerMotors);
 app.use(routerTest);
