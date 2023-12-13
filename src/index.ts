@@ -1,8 +1,7 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
 import { dbConfig } from './config/db_config';
-import { connectToDB } from './helper/db_helper';
-import { db_init } from './helper/db_helper';
+import { connectToDB, disconnectFromDB, q, db_init } from './helper/db_helper';
 import { json } from 'express';
 import routerMotors from './router/motorsRoutes';
 import routerTest from './router/testsRoutes';
@@ -22,7 +21,9 @@ app.use(cors(
 ));
 app.use(json());
 
-connectToDB(dbConfig).then((client) => {db_init(client)});
+connectToDB(dbConfig).then((client) => {db_init(client).then(() => {disconnectFromDB(client)})});
+connectToDB(dbConfig).then((client) => {q(client, 'SELECT * FROM tests').then((result) => {console.log(result.rows)}).then(() => {disconnectFromDB(client)})});
+
 
 app.use(routerMotors);
 app.use(routerTest);
