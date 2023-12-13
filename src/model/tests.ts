@@ -1,6 +1,3 @@
-import { Value } from "ts-postgres";
-
-
 const convertToTest = (res1: any, res2:any): SendBackTest => {
     return {
         temp_flow_in: res1[1],
@@ -40,41 +37,41 @@ type Test = {
     temp_flow_out: number;
     temp_out_side: number;
     temp_in_side: number;
-    test_id: Value;
+    test_id: any;
     tested_at: Date;
 };
 
 type SendBackTestList = SendBackTest[];
 
 type SendBackTest = {
-    temp_flow_in: Value;
-    temp_flow_out: Value;
-    temp_out_side: Value;
-    temp_in_side: Value;
+    temp_flow_in: any;
+    temp_flow_out: any;
+    temp_out_side: any;
+    temp_in_side: any;
     test:{
         sec0:{
-            sensor0: Value;
-            sensor1: Value;
-            sensor2: Value;
-            sensor3: Value;
-            sensor4: Value;
+            sensor0: any;
+            sensor1: any;
+            sensor2: any;
+            sensor3: any;
+            sensor4: any;
         },
         sec1:{
-            sensor0: Value;
-            sensor1: Value;
-            sensor2: Value;
-            sensor3: Value;
-            sensor4: Value;
+            sensor0: any;
+            sensor1: any;
+            sensor2: any;
+            sensor3: any;
+            sensor4: any;
         },
         sec2:{
-            sensor0: Value;
-            sensor1: Value;
-            sensor2: Value;
-            sensor3: Value;
-            sensor4: Value;
+            sensor0: any;
+            sensor1: any;
+            sensor2: any;
+            sensor3: any;
+            sensor4: any;
         }
     }
-    tested_at: Value;
+    tested_at: any;
 };
 
 type TestOxig = {
