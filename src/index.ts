@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
 import { dbConfig } from './config/db_config';
-import { connectToDB, disconnectFromDB, q, db_init } from './helper/db_helper';
+import { connectToDB, disconnectFromDB, db_init } from './helper/db_helper';
 import { json } from 'express';
 import routerMotors from './router/motorsRoutes';
 import routerTest from './router/testsRoutes';
