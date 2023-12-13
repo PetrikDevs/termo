@@ -22,7 +22,6 @@ app.use(cors(
 app.use(json());
 
 connectToDB(dbConfig).then((client) => {db_init(client).then(() => {disconnectFromDB(client)})});
-connectToDB(dbConfig).then((client) => {q(client, 'SELECT * FROM tests').then((result) => {console.log(result.rows)}).then(() => {disconnectFromDB(client)})});
 
 
 app.use(routerMotors);
