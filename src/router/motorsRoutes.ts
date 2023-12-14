@@ -1,10 +1,11 @@
-import { SzelepController } from '../controller/SzelepController';
+import ValveController from '../controller/valveController';
 import express from 'express';
 
 const routerMotors = express.Router();
-const szelepController = new SzelepController();
 
-routerMotors.get('/szelep', szelepController.getSzelep);
-routerMotors.post('/szelep', szelepController.setSzelep);
+const valveController = new ValveController();
+
+routerMotors.get('/valve', valveController.getValve);
+routerMotors.post('/valve', valveController.setValve);
 
 export default routerMotors;
