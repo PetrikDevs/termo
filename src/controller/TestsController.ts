@@ -1,17 +1,18 @@
-import { dbConfig } from "../config/db_config";
-import { connectToDB, q, saveSensorToDB, saveTestToDB } from "../helper/db_helper";
+import dbService from "../service/dbService";
 import { Senzor_m } from "../model/sensor_m";
 import { Test } from "../model/tests";
 import { Request, Response } from "express";
 
 
 export class TestsController {
+    private dbService: dbService;
+    constructor(dbService: dbService) {
+        this.dbService = dbService;
+    }
 
     public async getTests(req: Request, res: Response) {
         try {
-            const client = await connectToDB(dbConfig);
-            const result = await q(client, 'SELECT * FROM tests');
-            await client.end();
+            const result = await this.dbService.query('SELECT * FROM tests');
             res.json({ data: result.rows });
           } catch (error) {
             console.error("Error connecting to the database:", error);
@@ -21,8 +22,6 @@ export class TestsController {
 
     public async createTest(req: Request, res: Response) {
         try {
-            const client = await connectToDB(dbConfig);
-            console.log(req.body);
             const matrix = req.body.test;
 
             const sens: Senzor_m = {
@@ -50,7 +49,7 @@ export class TestsController {
                 tested_at: new Date()
             };
 
-            const sens_id = await saveSensorToDB(client, sens);
+            const sens_id = await this.dbService.query(`INSERT INTO term_matrix (sec0_sensor0, sec0_sensor1, sec0_sensor2, sec0_sensor3, sec0_sensor4, sec1_sensor0, sec1_sensor1, sec1_sensor2, sec1_sensor3, sec1_sensor4, sec2_sensor0, sec2_sensor1, sec2_sensor2, sec2_sensor3, sec2_sensor4, tested_at) VALUES (${sens.sec0.sensor0}, ${sens.sec0.sensor1}, ${sens.sec0.sensor2}, ${sens.sec0.sensor3}, ${sens.sec0.sensor4}, ${sens.sec1.sensor0}, ${sens.sec1.sensor1}, ${sens.sec1.sensor2}, ${sens.sec1.sensor3}, ${sens.sec1.sensor4}, ${sens.sec2.sensor0}, ${sens.sec2.sensor1}, ${sens.sec2.sensor2}, ${sens.sec2.sensor3}, ${sens.sec2.sensor4}, ${sens.tested_at}) RETURNING id`);
 
             const test: Test = {
                 temp_flow_in: req.body.temp_flow_in,
@@ -60,8 +59,8 @@ export class TestsController {
                 test_id: sens_id,//TODO
                 tested_at: new Date()
             };
-            await saveTestToDB(client, test);
-            await client.end();
+            await this.dbService.query(`INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, test_id, tested_at) VALUES (${test.temp_flow_in}, ${test.temp_flow_out}, ${test.temp_out_side}, ${test.temp_in_side}, ${test.test_id}, ${test.tested_at})`);
+            
             res.json({ data: test });
           } catch (error) {
             console.error("Error connecting to the database:", error);

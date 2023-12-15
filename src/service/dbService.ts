@@ -1,7 +1,7 @@
 import { Client } from 'ts-postgres';
 import DBConfig from '../model/dbConfig';
 
-export default class dbService {
+export default class DbService {
     db_config: DBConfig = {
         host: process.env.DB_HOST || 'termo-db-1',
         port: parseInt(process.env.DB_PORT || '5432'),
@@ -11,11 +11,7 @@ export default class dbService {
         password: process.env.POSTGRES_PASSWORD || 'alma'
     };
 
-    constructor() {
-        this.init;
-    }
-
-    public async connectToDB() {
+    private async connectToDB() {
         try{
             const client = new Client({
                 host: this.db_config.host,
@@ -32,7 +28,7 @@ export default class dbService {
         }
     }
 
-    public async disconnectFromDB(client: Client) {
+    private async disconnectFromDB(client: Client) {
         try {
             await client.end();
         }
@@ -60,7 +56,7 @@ export default class dbService {
         }
     }
 
-    init = async () => {
+    public init = async () => {
         try {
             await this.query(`
             CREATE TABLE IF NOT EXISTS tests (
