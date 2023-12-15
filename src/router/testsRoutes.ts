@@ -5,7 +5,7 @@ import express from 'express';
 const routerTest = express.Router();
 const testsController = new TestsController();
 
-routerTest.get('/tests', testsController.getTests);
+routerTest.get('/tests', testsController.getAllTests);
 routerTest.post('/tests', testsController.createTest);
 
 export default routerTest;

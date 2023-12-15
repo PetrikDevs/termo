@@ -37,11 +37,11 @@ export default class DbService {
         }
     }
 
-    public async query(query: string) {
+    public async query(query: string, params?: any[]) {
         try {
             const client = await this.connectToDB();
             try {
-                const result = await client.query(query);
+                const result = await client.query(query, params);
                 return result;
             }
             catch (error) {

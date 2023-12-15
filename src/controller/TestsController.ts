@@ -8,10 +8,10 @@ import TestService from "../service/testService";
 export class TestsController {
     private testService: TestService = new TestService();
 
-    public async getTests(req: Request, res: Response) {
+    public async getAllTests(req: Request, res: Response) {
         try {
-            const result = await this.dbService.query('SELECT * FROM tests');
-            res.json({ data: result.rows });
+            const tests = await this.testService.getAllTests();
+            res.json({ data: tests });
           } catch (error) {
             console.error("Error connecting to the database:", error);
             res.status(500).json({ error: "Internal Server Error" });
@@ -47,7 +47,37 @@ export class TestsController {
                 tested_at: new Date()
             };
 
-            const sens_id = await this.dbService.query(`INSERT INTO term_matrix (sec0_sensor0, sec0_sensor1, sec0_sensor2, sec0_sensor3, sec0_sensor4, sec1_sensor0, sec1_sensor1, sec1_sensor2, sec1_sensor3, sec1_sensor4, sec2_sensor0, sec2_sensor1, sec2_sensor2, sec2_sensor3, sec2_sensor4, tested_at) VALUES (${sens.sec0.sensor0}, ${sens.sec0.sensor1}, ${sens.sec0.sensor2}, ${sens.sec0.sensor3}, ${sens.sec0.sensor4}, ${sens.sec1.sensor0}, ${sens.sec1.sensor1}, ${sens.sec1.sensor2}, ${sens.sec1.sensor3}, ${sens.sec1.sensor4}, ${sens.sec2.sensor0}, ${sens.sec2.sensor1}, ${sens.sec2.sensor2}, ${sens.sec2.sensor3}, ${sens.sec2.sensor4}, ${sens.tested_at}) RETURNING id`);
+            const sensorValues = [
+                sens.sec0.sensor0,
+                sens.sec0.sensor1,
+                sens.sec0.sensor2,
+                sens.sec0.sensor3,
+                sens.sec0.sensor4,
+                sens.sec1.sensor0,
+                sens.sec1.sensor1,
+                sens.sec1.sensor2,
+                sens.sec1.sensor3,
+                sens.sec1.sensor4,
+                sens.sec2.sensor0,
+                sens.sec2.sensor1,
+                sens.sec2.sensor2,
+                sens.sec2.sensor3,
+                sens.sec2.sensor4,
+                sens.tested_at,
+              ];
+              
+              const sql = `
+                INSERT INTO term_matrix (
+                  sec0_sensor0, sec0_sensor1, sec0_sensor2, sec0_sensor3, sec0_sensor4,
+                  sec1_sensor0, sec1_sensor1, sec1_sensor2, sec1_sensor3, sec1_sensor4,
+                  sec2_sensor0, sec2_sensor1, sec2_sensor2, sec2_sensor3, sec2_sensor4,
+                  tested_at
+                ) VALUES (
+                  $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16
+                ) RETURNING id`;
+              
+              const sens_id = await this.dbService.query(sql, sensorValues);
+              
 
             const test: Test = {
                 temp_flow_in: req.body.temp_flow_in,

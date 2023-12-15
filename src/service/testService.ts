@@ -14,4 +14,10 @@ export default class TestService {
         const result = await this.dbService.query(sql);
         return result;
     }
+
+    public async createTest(test: any) {
+        const sql = `INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, test_id, tested_at) VALUES (${test.temp_flow_in}, ${test.temp_flow_out}, ${test.temp_out_side}, ${test.temp_in_side}, ${test.test_id}, ${test.tested_at})`;
+        const result = await this.dbService.query(sql);
+        return result;
+    }
 }
