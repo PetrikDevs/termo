@@ -2,13 +2,11 @@ import dbService from "../service/dbService";
 import { Senzor_m } from "../model/sensor_m";
 import { Test } from "../model/tests";
 import { Request, Response } from "express";
+import TestService from "../service/testService";
 
 
 export class TestsController {
-    private dbService: dbService;
-    constructor(dbService: dbService) {
-        this.dbService = dbService;
-    }
+    private testService: TestService = new TestService();
 
     public async getTests(req: Request, res: Response) {
         try {
@@ -60,7 +58,7 @@ export class TestsController {
                 tested_at: new Date()
             };
             await this.dbService.query(`INSERT INTO tests (temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, test_id, tested_at) VALUES (${test.temp_flow_in}, ${test.temp_flow_out}, ${test.temp_out_side}, ${test.temp_in_side}, ${test.test_id}, ${test.tested_at})`);
-            
+
             res.json({ data: test });
           } catch (error) {
             console.error("Error connecting to the database:", error);

@@ -1,7 +1,11 @@
-import axiosConfig from "../config/axios_config";
 import { Valve } from "../model/valve";
+import ApiService from "./apiService";
 
 export default class ValveService {
+    private apiService: ApiService;
+    constructor() {
+        this.apiService = new ApiService();
+    }
     public async getValve(): Promise<Valve> {
         try {
             return {
@@ -22,7 +26,7 @@ export default class ValveService {
 
     public async setValve(valve: Valve): Promise<any> {
         try {
-            const res = await axiosConfig.post('/set_valve', { valve });
+            const res = await this.apiService.post('/set_valve', valve);
             return res.data.data;
         } catch (error) {
             console.error(error);
