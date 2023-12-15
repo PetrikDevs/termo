@@ -4,14 +4,13 @@ import { Valve } from "../model/valve";
 export default class ValveService {
     public async getValve(): Promise<Valve> {
         try {
-            const valve: Valve = {
+            return {
                 valve0: false,
                 valve1: false,
                 valve2: false,
                 valve3: false,
                 valve4: false
             }
-            return valve;
             /*
             const res = await axiosConfig.get('/get_valve');
             return res.data.data;

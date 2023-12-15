@@ -42,4 +42,4 @@ class App {
     }
 }
 
-const app = new App(3000);
+export default App;

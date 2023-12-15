@@ -3,6 +3,96 @@ import { DBConfig } from '../config/db_config';
 import { Test, TestOxig } from '../model/tests';
 import { Senzor_m } from '../model/sensor_m';
 
+
+export default class dbService {
+    db_config: DBConfig = {
+        host: process.env.DB_HOST || 'termo-db-1',
+        port: parseInt(process.env.DB_PORT || '5432'),
+    
+        database: process.env.POSTGRES_DB || 'alma',
+        user: process.env.POSTGRES_USER || 'alma',
+        password: process.env.POSTGRES_PASSWORD || 'alma'
+    };
+
+    public async connectToDB() {
+        const client = await connectToDB(this.db_config);
+        return client;
+    }
+
+    public async query(query: string) {
+        try {
+            const client = await this.connectToDB();
+            const result = await client.query(query);
+            await client.end();
+            return result;
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+    public async getTests() {
+        try {
+            const client = await connectToDB(dbConfig);
+            const result = await q(client, 'SELECT * FROM tests');
+            await client.end();
+            return result.rows;
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+
+    public async getTestOxig() {
+        try {
+            const client = await connectToDB(dbConfig);
+            const result = await q(client, 'SELECT * FROM tests_oxig');
+            await client.end();
+            return result.rows;
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+
+    public async getTermMatrix() {
+        try {
+            const client = await connectToDB(dbConfig);
+            const result = await q(client, 'SELECT * FROM term_matrix');
+            await client.end();
+            return result.rows;
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+
+    public async createTest(test: Test) {
+        try {
+            const client = await connectToDB(dbConfig);
+            await saveTestToDB(client, test);
+            await client.end();
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+
+    public async createTestOxig(test: TestOxig) {
+        try {
+            const client = await connectToDB(dbConfig);
+            await saveTestOxigToDB(client, test);
+            await client.end();
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+
+    public async createTermMatrix(matrix: Senzor_m) {
+        try {
+            const client = await connectToDB(dbConfig);
+            await saveSensorToDB(client, matrix);
+            await client.end();
+          } catch (error) {
+            console.error("Error connecting to the database:", error);
+          }
+    }
+}
+
 const connectToDB = async (dbConfig: DBConfig): Promise<Client> =>{
     const client = new Client({
         host: dbConfig.host,
