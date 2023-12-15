@@ -1,22 +1,25 @@
 import express, { json } from 'express';
-import routerMotors from './router/motorsRoutes';
+import valveRouter from './router/valveRoutes';
 import routerTest from './router/testsRoutes';
 import routerTemp from './router/tempRoutes';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
+import DbService from './service/dbService';
 
 class App {
     private app: express.Application;
     private port: number;
-    private dbService: any;
+    private dbService: DbService;
 
-    constructor(port: number) {
+    constructor(port: number, dbService: DbService) {
         this.app = express();
         this.config();
         this.routes();
         this.port = port;
         this.start();
+        this.dbService = dbService;
+        this.dbService.init();
     }
     config() {
         this.app.use(bodyParser.json());
@@ -31,7 +34,7 @@ class App {
         this.app.use(morgan('combined'));
     }
     routes() {
-      this.app.use(routerMotors);
+      this.app.use(valveRouter);
       this.app.use(routerTest);
       this.app.use(routerTemp);
     }
