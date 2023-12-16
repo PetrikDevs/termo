@@ -7,14 +7,12 @@ import DbService from './service/dbService';
 
 class App {
     private app: express.Application;
-    private port: number;
-    private dbService: DbService;
+    private port: number = process.env.PORT ? parseInt(process.env.PORT) : 3000;
+    private dbService: DbService = new DbService();
 
-    constructor(port: number, dbService: DbService) {
+    constructor() {
         this.app = express();
         this.config();
-        this.port = port;
-        this.dbService = dbService;
         this.dbService.init();
         this.routes();
         this.start();

@@ -17,7 +17,7 @@ export default class TimerService {
 
         // Set a new interval
         this.intervalId = setInterval(() => {
-            this.func;
+            this.func();
         }, this.time * 60 * 1000);
     }
 
