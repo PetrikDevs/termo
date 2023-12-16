@@ -1,17 +1,36 @@
 import DbService from "./dbService";
 import SensorMatrix from "../model/sensor";
 import Test from "../model/test";
+import ApiService from "./apiService";
 
 export default class TestService {
     private dbService: DbService = new DbService();
+    private apiService: ApiService = new ApiService();
 
-    public async getAllTests() {
+    public async getLastTest() {
+        //getting the last test from the db
         const result = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT 1');
-        const result2 = await this.dbService.query(`SELECT * FROM term_matrix WHERE id = ${result.rows[0][6]}`);
+        const result2 = await this.dbService.query(`SELECT * FROM term_matrix WHERE id = ?`, [result.rows[0][6]]);
 
+        //creating the test instance and loadin' it up
         const test = new Test();
         test.setSendBack(result.rows[0], result2.rows[0]);
         return test;
+    }
+
+    public async getAllTests() {
+        //getting all the tests from the db
+        const res1 = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC');
+        const test_list: Test[] = [];
+
+        //creating the test instances and loadin' 'em up
+        for(let i = 0; i < res1.rows.length; i++){
+            const res2 = await this.dbService.query('SELECT * FROM term_matrix WHERE id = ?', [res1.rows[i][6]]);
+            const test = new Test();
+            test.setSendBack(res1.rows[i], res2.rows[0]);
+            test_list.push(test);
+        }
+        return test_list;
     }
 
     public async getAllMainTests() {
@@ -26,8 +45,11 @@ export default class TestService {
         return result;
     }
 
-    public async createTest(req: any) {
+    public async createTest() {
         try {
+            //getting the sensor matrix from the arduino
+            const req = await this.apiService.get('/api/term');
+
             //creating the test and the sensor matrix instances
             const test = new Test();
             const sens = new SensorMatrix(req.body.test);

@@ -1,7 +1,5 @@
 import express, { json } from 'express';
-import valveRouter from './router/valveRoutes';
-import routerTest from './router/testsRoutes';
-import routerTemp from './router/tempRoutes';
+import routerApi from './router/apiRoutes';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import morgan from 'morgan';
@@ -36,9 +34,7 @@ class App {
     }
 
     routes() {
-      this.app.use(valveRouter);
-      this.app.use(routerTest);
-      this.app.use(routerTemp);
+      this.app.use('/api', routerApi);
     }
     
     start() {
