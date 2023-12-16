@@ -23,11 +23,6 @@ type SensorMatrixT= {
     tested_at: Date;
 };
 
-type Sensor_res = {
-    id: number;
-}
-
 export {
-    Sensor_res,
     SensorMatrixT
 };
