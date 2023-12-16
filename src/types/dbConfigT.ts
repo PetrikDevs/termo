@@ -1,4 +1,4 @@
-export default interface DBConfig {
+export type DbConfig = {
     host: string;
     port: number;
     database: string;

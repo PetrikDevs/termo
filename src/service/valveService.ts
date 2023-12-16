@@ -1,4 +1,4 @@
-import { Valve } from "../model/valve";
+import { Valve } from "../types/valveT";
 import ApiService from "./apiService";
 
 export default class ValveService {

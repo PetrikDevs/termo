@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import ValveService from "../service/valveService";
-import { Valve } from "../model/valve";
+import { Valve } from "../types/valveT";
 
 export default class ValveController {
     private valveService: ValveService;

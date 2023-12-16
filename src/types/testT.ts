@@ -1,4 +1,4 @@
-const convertToTest = (res1: any, res2:any): SendBackTest => {
+const convertToTest = (res1: any, res2:any): SendBackTestT => {
     return {
         temp_flow_in: res1[1],
         temp_flow_out: res1[2],
@@ -31,8 +31,39 @@ const convertToTest = (res1: any, res2:any): SendBackTest => {
     };
 }
 
+type TestT = {
+    temp_flow_in: any;
+    temp_flow_out: any;
+    temp_out_side: any;
+    temp_in_side: any;
+    test_id?: any;
+    test?:{
+        sec0:{
+            sensor0: any;
+            sensor1: any;
+            sensor2: any;
+            sensor3: any;
+            sensor4: any;
+        },
+        sec1:{
+            sensor0: any;
+            sensor1: any;
+            sensor2: any;
+            sensor3: any;
+            sensor4: any;
+        },
+        sec2:{
+            sensor0: any;
+            sensor1: any;
+            sensor2: any;
+            sensor3: any;
+            sensor4: any;
+        }
+    }
+    tested_at: any;
+}
 
-type Test = {
+type TestMT = {
     temp_flow_in: number;
     temp_flow_out: number;
     temp_out_side: number;
@@ -41,9 +72,9 @@ type Test = {
     tested_at: Date;
 };
 
-type SendBackTestList = SendBackTest[];
+type SendBackTestListT = SendBackTestT[];
 
-type SendBackTest = {
+type SendBackTestT = {
     temp_flow_in: any;
     temp_flow_out: any;
     temp_out_side: any;
@@ -87,9 +118,9 @@ type TestVapour = {
 
 export {
     convertToTest,
-    SendBackTest,
-    SendBackTestList,
-    Test,
+    SendBackTestT,
+    SendBackTestListT,
+    TestT,
     TestOxig,
     TestVapour
 };

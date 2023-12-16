@@ -1,4 +1,4 @@
-type Senzor_m = {
+type SensorMatrixT= {
     sec0:{
         sensor0: number;
         sensor1: number;
@@ -29,5 +29,5 @@ type Sensor_res = {
 
 export {
     Sensor_res,
-    Senzor_m
+    SensorMatrixT
 };

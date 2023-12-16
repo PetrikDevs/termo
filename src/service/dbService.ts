@@ -1,8 +1,8 @@
 import { Client } from 'ts-postgres';
-import DBConfig from '../model/dbConfig';
+import { DbConfig } from '../types/dbConfigT';
 
 export default class DbService {
-    private db_config: DBConfig = {
+    private db_config: DbConfig = {
         host: process.env.DB_HOST || 'termo-db-1',
         port: parseInt(process.env.DB_PORT || '5432'),
     
