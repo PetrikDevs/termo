@@ -15,12 +15,13 @@ class App {
     constructor(port: number, dbService: DbService) {
         this.app = express();
         this.config();
-        this.routes();
         this.port = port;
-        this.start();
         this.dbService = dbService;
         this.dbService.init();
+        this.routes();
+        this.start();
     }
+
     config() {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
@@ -33,11 +34,13 @@ class App {
         this.app.use(json());
         this.app.use(morgan('combined'));
     }
+
     routes() {
       this.app.use(valveRouter);
       this.app.use(routerTest);
       this.app.use(routerTemp);
     }
+    
     start() {
         this.app.listen(this.port, () => {
             console.log(`Server running on port ${this.port}`);

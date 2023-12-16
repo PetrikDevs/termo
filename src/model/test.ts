@@ -1,41 +1,64 @@
-import { SendBackTestT, TestT } from "../types/testT";
+import { TestT } from "../types/testT";
 
 export default class Test {
    private test: TestT;
 
-   constructor(test: any) {
+   constructor() {
        this.test = {
-           temp_flow_in: test.temp_flow_in,
-           temp_flow_out: test.temp_flow_out,
-           temp_out_side: test.temp_out_side,
-           temp_in_side: test.temp_in_side,
-           test_id: test.test_id,
            tested_at: new Date()
        };
    }
-   setSensorMatrix(matrix: any) {
-         this.test.test = {
-              sec0:{
-                sensor0: matrix.sec0.sensor0,
-                sensor1: matrix.sec0.sensor1,
-                sensor2: matrix.sec0.sensor2,
-                sensor3: matrix.sec0.sensor3,
-                sensor4: matrix.sec0.sensor4,
-              },
-              sec1:{
-                sensor0: matrix.sec1.sensor0,
-                sensor1: matrix.sec1.sensor1,
-                sensor2: matrix.sec1.sensor2,
-                sensor3: matrix.sec1.sensor3,
-                sensor4: matrix.sec1.sensor4,
-              },
-              sec2:{
-                sensor0: matrix.sec2.sensor0,
-                sensor1: matrix.sec2.sensor1,
-                sensor2: matrix.sec2.sensor2,
-                sensor3: matrix.sec2.sensor3,
-                sensor4: matrix.sec2.sensor4,
-              }
-         };
+
+   setTestMain(req: any, id: any) {
+        this.test.temp_flow_in = req.body.temp_flow_in,
+        this.test.temp_flow_out = req.body.temp_flow_out,
+        this.test.temp_out_side = req.body.temp_out_side,
+        this.test.temp_in_side = req.body.temp_in_side,
+        this.test.test_id = id
+    };
+
+    convertToDBFormat() {
+        return [
+            this.test.temp_flow_in,
+            this.test.temp_flow_out,
+            this.test.temp_out_side,
+            this.test.temp_in_side,
+            this.test.test_id,
+            this.test.tested_at
+        ];
+    }
+
+   setSendBack(req1: any, req2: any) {
+        this.test = {
+            temp_flow_in: req1[1],
+            temp_flow_out: req1[2],
+            temp_out_side: req1[3],
+            temp_in_side: req1[4],
+            test_id: req1[6],
+            test: {
+                sec0:{
+                    sensor0: req2[2],
+                    sensor1: req2[3],
+                    sensor2: req2[4],
+                    sensor3: req2[5],
+                    sensor4: req2[6],
+                },
+                sec1:{
+                    sensor0: req2[7],
+                    sensor1: req2[8],
+                    sensor2: req2[9],
+                    sensor3: req2[10],
+                    sensor4: req2[11],
+                },
+                sec2:{
+                    sensor0: req2[12],
+                    sensor1: req2[13],
+                    sensor2: req2[14],
+                    sensor3: req2[15],
+                    sensor4: req2[16],
+                }
+            },
+            tested_at: req1[5]
+        };
     }
 }

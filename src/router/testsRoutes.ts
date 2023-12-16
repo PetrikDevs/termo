@@ -1,9 +1,9 @@
-import e from 'express';
-import { TestsController } from '../controller/TestsController';
+
 import express from 'express';
+import TestController from '../controller/TestsController';
 
 const routerTest = express.Router();
-const testsController = new TestsController();
+const testsController = new TestController();
 
 routerTest.get('/tests', testsController.getAllTests);
 routerTest.post('/tests', testsController.createTest);
