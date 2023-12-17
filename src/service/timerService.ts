@@ -1,5 +1,5 @@
 export default class TimerService {
-    private time: number = 3; //in minutes
+    private time: number = 0.2; //in minutes
     private func: Function;
     private intervalId: NodeJS.Timeout | null = null;
 

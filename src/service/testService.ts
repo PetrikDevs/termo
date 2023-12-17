@@ -50,6 +50,12 @@ export default class TestService {
             //getting the sensor matrix from the arduino
             const req = await this.apiService.get('/api/term');
 
+            //checking if the data is valid
+            if (req.body.test === undefined) {
+                console.log("No data from the arduino");
+                return;
+            }
+
             //creating the test and the sensor matrix instances
             const test = new Test();
             const sens = new SensorMatrix(req.body.test);
@@ -76,7 +82,7 @@ export default class TestService {
             await this.dbService.query(sql2, testValues);
         }
         catch (error) {
-            console.error("Error in the testService:", error);
+            console.error("Error getting the data:", error);
         }
     }
 }
