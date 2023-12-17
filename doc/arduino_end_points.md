@@ -3,15 +3,15 @@
     In this document you can find all the end points that are callable
 
 ## GET 
-### {{Base}}/get_szelep
+### {{Base}}/get_valve
 > gives back a simple json object, FALSE for closed "szelep", and TRUE for open "szelep"
 ```json
 {
-    "szelep0": false,
-    "szelep1": true,
-    "szelep2": true,
-    "szelep3": false,
-    "szelep4": false
+    "valve0": false,
+    "valve1": true,
+    "valve2": true,
+    "valve3": false,
+    "valve4": false
 }
 ```
 
@@ -53,14 +53,14 @@
 
 ## Post 
 
-### {{Base}}/set_szelep
+### {{Base}}/set_valve
  > The server will call the endpoint and send the wanted stage of the valves
 ```json
 {
-    "szelep0": false,
-    "szelep1": true,
-    "szelep2": true,
-    "szelep3": false,
-    "szelep4": false
+    "valve0": false,
+    "valve1": true,
+    "valve2": true,
+    "valve3": false,
+    "valve4": false
 }
 ```
