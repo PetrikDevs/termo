@@ -27,7 +27,7 @@ export default class TimerService {
         this.startInterval();
     }
 
-    public getTime() {
+    public getTime() : number{
         return this.time;
     }
 
