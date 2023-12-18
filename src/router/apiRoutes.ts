@@ -1,5 +1,5 @@
 import express from 'express';
-import TestController from '../controller/testsController';
+import TestController from '../controller/TestsController';
 import ValveController from '../controller/valveController';
 
 const routerApi = express.Router();
