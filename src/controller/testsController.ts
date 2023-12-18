@@ -6,6 +6,15 @@ export default class TestController {
     private testService: TestService = new TestService();
     private timerService: TimerService = new TimerService(this.testService.createTest);
 
+    constructor() {
+        this.getAllTests = this.getAllTests.bind(this);
+        this.getLastTest = this.getLastTest.bind(this);
+        this.getAllTestMain = this.getAllTestMain.bind(this);
+        this.getTestById = this.getTestById.bind(this);
+        this.setTimer = this.setTimer.bind(this);
+        this.getTimer = this.getTimer.bind(this);
+    }
+
     public setTimer(req: Request, res: Response) {
         try {
             this.timerService.setTime(req.body.time);

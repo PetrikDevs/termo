@@ -22,6 +22,14 @@ export default class ValveService {
         }
     }
 
+    public getAlma(): string {
+        try {
+            return "alma";
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     public async setValve(valve: Valve): Promise<any> {
         try {
             const res = await this.apiService.post('/set_valve', valve);
