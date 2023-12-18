@@ -18,6 +18,7 @@ export default class TimerService {
         // Set a new interval
         this.intervalId = setInterval(() => {
             this.func();
+            console.log("TimerService: Time is " + this.time + " minutes");
         }, this.time * 60 * 1000);
     }
 
