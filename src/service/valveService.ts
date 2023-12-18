@@ -2,11 +2,9 @@ import { Valve } from "../types/valveT";
 import ApiService from "./apiService";
 
 export default class ValveService {
-    private apiService: ApiService;
-    constructor() {
-        this.apiService = new ApiService();
-    }
-    public async getValve(): Promise<Valve> {
+    private apiService: ApiService = new ApiService();;
+
+    public getValve(): Valve {
         try {
             return {
                 valve0: false,

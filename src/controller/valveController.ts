@@ -3,16 +3,12 @@ import ValveService from "../service/valveService";
 import { Valve } from "../types/valveT";
 
 export default class ValveController {
-    private valveService: ValveService;
+    public valveService: ValveService = new ValveService();
 
-    constructor() {
-        this.valveService = new ValveService();
-    }
-
-    public async getValve(req: Request, res: Response) {
+    public getValve(req: Request, res: Response) {
         try {
-            const valve: Valve = await this.valveService.getValve();
-            res.json({ data: valve });
+            const valve: Valve =  this.valveService.getValve();
+            res.json({ data: 'valve' });
         } catch (error) {
             console.error("Error connecting to the arduino", error);
             res.status(500).json({ error: "Internal Server Error" });

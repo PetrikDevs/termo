@@ -4,7 +4,7 @@ import TimerService from "../service/timerService";
 
 export default class TestController {
     private testService: TestService = new TestService();
-    private timerService: TimerService = new TimerService(this.testService.createTest.bind(this.testService));
+    private timerService: TimerService = new TimerService(this.testService.createTest);
 
     public setTimer(req: Request, res: Response) {
         try {
@@ -17,15 +17,16 @@ export default class TestController {
     }
 
     public getTimer(req: Request, res: Response) {
-        try {
-            const time = this.timerService.getTime();
-            console.log(time);
-            return res.status(200).json({ data: time });
-          } catch (error) {
-            console.error("Error connecting to the database:", error);
-            res.status(500).json({ error: "Internal Server Error" });
-          }
-    }
+      try {
+          const time: number = this.timerService.getTime();
+          console.log(time);
+          return res.status(200).json({ data: time });
+      } catch (error) {
+          console.error("Error trying to get timer", error);
+          res.status(500).json({ error: "Internal Server Error" });
+      }
+  }
+  
 
     public async getAllTests(req: Request, res: Response) {
         try {

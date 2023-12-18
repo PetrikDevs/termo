@@ -27,7 +27,8 @@ export default class TimerService {
         this.startInterval();
     }
 
-    public getTime() : number{
+    public getTime(): number{
+        console.log(this.time);
         return this.time;
     }
 
