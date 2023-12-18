@@ -23,6 +23,7 @@ export default class ValveController {
     public async setValve(req: Request, res: Response) {
         try {
             let valve: Valve =  this.valveService.formatValve(req.body.valve);
+            console.log(valve);
             let result = await this.valveService.setValve(valve);
             res.json({ data: result });
         } catch (error) {
