@@ -19,6 +19,7 @@ export default class TestController {
     public getTimer(req: Request, res: Response) {
         try {
             const time = this.timerService.getTime();
+            console.log(time);
             return res.status(200).json({ data: time });
           } catch (error) {
             console.error("Error connecting to the database:", error);
