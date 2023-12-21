@@ -2,17 +2,18 @@ import { Valve } from "../types/valveT";
 import ApiService from "./apiService";
 
 export default class ValveService {
-    private apiService: ApiService = new ApiService();;
+    private apiService: ApiService = new ApiService();
+    private valve: Valve = {
+        valve0: false,
+        valve1: false,
+        valve2: false,
+        valve3: false,
+        valve4: false
+    }
 
     public getValve(): Valve {
         try {
-            return {
-                valve0: false,
-                valve1: false,
-                valve2: false,
-                valve3: false,
-                valve4: false
-            }
+            return this.valve;
             /*
             const res = await axiosConfig.get('/get_valve');
             return res.data.data;
@@ -24,8 +25,10 @@ export default class ValveService {
 
     public async setValve(valve: Valve): Promise<any> {
         try {
-            const res = await this.apiService.post('/set_valve', valve);
-            return res.data.data;
+            this.valve = valve;
+            /*const res = await this.apiService.post('/set_valve', valve);
+            return res.data.data;*/
+            return this.valve;
         } catch (error) {
             console.error(error);
         }
