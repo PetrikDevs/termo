@@ -23,7 +23,7 @@ export default class ValveService {
         }
     }
 
-    public async setValve(valve: Valve): Promise<any> {
+    public setValve(valve: Valve): Valve {
         try {
             this.valve = valve;
             /*const res = await this.apiService.post('/set_valve', valve);
@@ -33,48 +33,19 @@ export default class ValveService {
             console.error(error);
         }
     }
-    public formatValve(id: string): Valve {
-        switch (id) {
-            case "1":
-                return {
-                    valve0: true,
-                    valve1: true,
-                    valve2: false,
-                    valve3: false,
-                    valve4: false
-                }
-            case "2":
-                return {
-                    valve0: false,
-                    valve1: false,
-                    valve2: true,
-                    valve3: true,
-                    valve4: false
-                }
-            case "3":
-                return {
-                    valve0: true,
-                    valve1: true,
-                    valve2: true,
-                    valve3: true,
-                    valve4: false
-                }
-            case "4":
-                return {
-                    valve0: false,
-                    valve1: false,
-                    valve2: false,
-                    valve3: false,
-                    valve4: true
-                }
-            default:
-                return {
-                    valve0: false,
-                    valve1: false,
-                    valve2: false,
-                    valve3: false,
-                    valve4: false
-                }
+    public formatValve(data: any): Valve {
+        try {
+            const valve: Valve = {
+                valve0: data.valve0,
+                valve1: data.valve1,
+                valve2: data.valve2,
+                valve3: data.valve3,
+                valve4: data.valve4
+            }
+            return valve;
+        } catch (error) {
+            console.error(error);
+            return this.valve;
         }
     }
 }
