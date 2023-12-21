@@ -22,7 +22,8 @@ export default class ValveController {
 
     public setValve(req: Request, res: Response) {
         try {
-            let valve: Valve =  this.valveService.formatValve(req.body.valve);
+            console.log(req.body);
+            let valve: Valve =  this.valveService.formatValve(req.body);
             let result = this.valveService.setValve(valve);
             res.json({ data: result });
         } catch (error) {
