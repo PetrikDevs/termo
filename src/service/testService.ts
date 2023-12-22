@@ -139,7 +139,8 @@ export default class TestService {
                 ) VALUES (
                 $1, $2, $3, $4, $5, $6
                 )`;
-            await this.dbService.query(sql2, testValues);
+            const res = await this.dbService.query(sql2, testValues);
+            console.log(res);
         }
         catch (error) {
             console.error("Error getting the data:", error);
