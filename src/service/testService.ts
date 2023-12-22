@@ -47,40 +47,6 @@ export default class TestService {
 
     public async createTest() {
         try {
-            //getting the sensor matrix from the arduino
-            //const req = await this.apiService.get('/api/term');
-            /*
-            {
-    "temp_flow_in": 60,
-    "temp_flow_out": 60,
-    "temp_out_side": 60,
-    "temp_in_side": 70,
-    "test":{
-        "sec0":{
-            "sensor0": 50,
-            "sensor1": 50,
-            "sensor2": 50,
-            "sensor3": 50,
-            "sensor4": 50
-        },
-        "sec1": {
-            "sensor0": 50,
-            "sensor1": 50,
-            "sensor2": 50,
-            "sensor3": 50,
-            "sensor4": 50
-        },
-        "sec2": {
-            "sensor0": 50,
-            "sensor1": 50,
-            "sensor2": 50,
-            "sensor3": 50,
-            "sensor4": 50
-        }
-    }
-}
-            */
-
             const req = {
                 body: {
                     temp_flow_in: 60,
@@ -118,6 +84,8 @@ export default class TestService {
 
             //creating the test and the sensor matrix instances
             const test = new Test();
+            console.log(req.body.test);
+    
             const sens = new SensorMatrix(req.body.test);
 
             //saving matrix to db
@@ -128,9 +96,10 @@ export default class TestService {
                 $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16
                 ) RETURNING id`;
             const sens_id = await this.dbService.query(sql, sensorValues);
-
+            console.log(sens_id.rows[0]);
+            
             //setting the main elements of the test
-            test.setTestMain(req, sens_id.rows[0][0]);
+            test.setTestMain(req, sens_id.rows[0]);
 
             //saving test to db
             const testValues = test.convertToDBFormat();
