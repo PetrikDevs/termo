@@ -1,11 +1,11 @@
 import DbService from "./dbService";
 import SensorMatrix from "../model/sensor";
 import Test from "../model/test";
-import ApiService from "./apiService";
+//import ApiService from "./apiService";
 
 export default class TestService {
     private dbService: DbService = new DbService();
-    private apiService: ApiService = new ApiService();
+    //private apiService: ApiService = new ApiService();
 
     public async getLastTest() {
         //getting the last test from the db
