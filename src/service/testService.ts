@@ -49,12 +49,74 @@ export default class TestService {
         try {
             //getting the sensor matrix from the arduino
             //const req = await this.apiService.get('/api/term');
+            /*
+            {
+    "temp_flow_in": 60,
+    "temp_flow_out": 60,
+    "temp_out_side": 60,
+    "temp_in_side": 70,
+    "test":{
+        "sec0":{
+            "sensor0": 50,
+            "sensor1": 50,
+            "sensor2": 50,
+            "sensor3": 50,
+            "sensor4": 50
+        },
+        "sec1": {
+            "sensor0": 50,
+            "sensor1": 50,
+            "sensor2": 50,
+            "sensor3": 50,
+            "sensor4": 50
+        },
+        "sec2": {
+            "sensor0": 50,
+            "sensor1": 50,
+            "sensor2": 50,
+            "sensor3": 50,
+            "sensor4": 50
+        }
+    }
+}
+            */
 
+            const req = {
+                body: {
+                    temp_flow_in: 60,
+                    temp_flow_out: 60,
+                    temp_out_side: 60,
+                    temp_in_side: 70,
+                    test: {
+                        sec0: {
+                            sensor0: 50,
+                            sensor1: 50,
+                            sensor2: 50,
+                            sensor3: 50,
+                            sensor4: 50
+                        },
+                        sec1: {
+                            sensor0: 50,
+                            sensor1: 50,
+                            sensor2: 50,
+                            sensor3: 50,
+                            sensor4: 50
+                        },
+                        sec2: {
+                            sensor0: 50,
+                            sensor1: 50,
+                            sensor2: 50,
+                            sensor3: 50,
+                            sensor4: 50
+                        }
+                    }
+                }
+            }
             //checking if the data is valid
-            console.log("No data from the arduino");
-            return;
+            //console.log("No data from the arduino");
+            //return;
 
-            /*creating the test and the sensor matrix instances
+            //creating the test and the sensor matrix instances
             const test = new Test();
             const sens = new SensorMatrix(req.body.test);
 
@@ -78,8 +140,6 @@ export default class TestService {
                 $1, $2, $3, $4, $5, $6
                 )`;
             await this.dbService.query(sql2, testValues);
-
-            */
         }
         catch (error) {
             console.error("Error getting the data:", error);
