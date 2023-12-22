@@ -99,8 +99,10 @@ export default class TestService {
                 ) VALUES (
                 $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16
                 ) RETURNING id`;
+            console.log('sql: ' + sql + ' values: ' + sensorValues);
+            
             const sens_id = await this.dbService.query(sql, sensorValues);
-            console.log(sens_id.rows);
+            console.log('id: ' + sens_id);
             
             //setting the main elements of the test
             test.setTestMain(req, sens_id.rows);
