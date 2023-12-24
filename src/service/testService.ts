@@ -13,7 +13,7 @@ export default class TestService {
     
         console.log('id: ', result.rows[0][6]);
 
-        const result2 = await this.dbService.query(`SELECT * FROM term_matrix WHERE id = ?`, [result.rows[0][6]]);
+        const result2 = await this.dbService.query(`SELECT * FROM term_matrix WHERE id = $1`, [result.rows[0][6]]);
 
         //creating the test instance and loadin' it up
         const test = new Test();
@@ -28,7 +28,7 @@ export default class TestService {
 
         //creating the test instances and loadin' 'em up
         for(let i = 0; i < res1.rows.length; i++){
-            const res2 = await this.dbService.query('SELECT * FROM term_matrix WHERE id = ?', [res1.rows[i][6]]);
+            const res2 = await this.dbService.query('SELECT * FROM term_matrix WHERE id = $1', [res1.rows[i][6]]);
             const test = new Test();
             test.setSendBack(res1.rows[i], res2.rows[0]);
             test_list.push(test);
@@ -43,7 +43,7 @@ export default class TestService {
     }
 
     public async getMainTestById(id: string) {
-        const sql = `SELECT * FROM tests WHERE id = ?`;
+        const sql = `SELECT * FROM tests WHERE id = $1`;
         const result = await this.dbService.query(sql, [id]);
         return result;
     }
