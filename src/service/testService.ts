@@ -58,25 +58,25 @@ export default class TestService {
                     temp_in_side: 70,
                     test: {
                         sec0: {
-                            sensor0: 50,
-                            sensor1: 50,
-                            sensor2: 50,
-                            sensor3: 50,
-                            sensor4: 50
+                            sensor0: 1,
+                            sensor1: 2,
+                            sensor2: 3,
+                            sensor3: 4,
+                            sensor4: 5
                         },
                         sec1: {
-                            sensor0: 50,
-                            sensor1: 50,
-                            sensor2: 50,
-                            sensor3: 50,
-                            sensor4: 50
+                            sensor0: 6,
+                            sensor1: 7,
+                            sensor2: 8,
+                            sensor3: 9,
+                            sensor4: 10
                         },
                         sec2: {
-                            sensor0: 50,
-                            sensor1: 50,
-                            sensor2: 50,
-                            sensor3: 50,
-                            sensor4: 50
+                            sensor0: 11,
+                            sensor1: 12,
+                            sensor2: 13,
+                            sensor3: 14,
+                            sensor4: 15
                         }
                     }
                 }
