@@ -45,7 +45,7 @@ export default class SensorMatrix {
             this.sen.sec2.sensor2,
             this.sen.sec2.sensor3,
             this.sen.sec2.sensor4,
-            this.sen.tested_at,
+            this.sen.tested_at
         ];
     }
 }

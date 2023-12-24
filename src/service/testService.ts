@@ -4,7 +4,7 @@ import Test from "../model/test";
 //import ApiService from "./apiService";
 
 export default class TestService {
-    private dbService: DbService = new DbService();
+    public dbService: DbService = new DbService();
     //private apiService: ApiService = new ApiService();
 
     public async getLastTest() {
@@ -45,7 +45,7 @@ export default class TestService {
         return result;
     }
 
-    public async createTest() {
+    public async createTest(): Promise<any> {
         try {
             const req = {
                 body: {
@@ -94,14 +94,16 @@ export default class TestService {
             //saving matrix to db
             const sensorValues = sens.convertToDBFormat();
             console.log(sensorValues);
+
             const sql = `INSERT INTO term_matrix (
-                sec0_sensor0, sec0_sensor1, sec0_sensor2, sec0_sensor3, sec0_sensor4,sec1_sensor0, sec1_sensor1, sec1_sensor2, sec1_sensor3, sec1_sensor4, sec2_sensor0, sec2_sensor1, sec2_sensor2, sec2_sensor3, sec2_sensor4, tested_at
+                sensor_00, sensor_01, sensor_02, sensor_03, sensor_04, sensor_10, sensor_11, sensor_12, sensor_13, sensor_14, sensor_20, sensor_21, sensor_22, sensor_23, sensor_24, tested_at
                 ) VALUES (
                 $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16
                 ) RETURNING id`;
             console.log('sql: ' + sql + ' values: ' + sensorValues);
             
             const sens_id = await this.dbService.query(sql, sensorValues);
+            console.log('---------');
             console.log('id: ' + sens_id);
             
             //setting the main elements of the test

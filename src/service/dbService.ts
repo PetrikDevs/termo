@@ -41,10 +41,18 @@ export default class DbService {
         try {
             const client = await this.connectToDB();
             try {
-                console.log("Executing query:", query, params);
-                const result = await client.query(query, params);
-                console.log("Query executed successfully:", result);
-                return result;
+                if (params === undefined) {
+                    console.log("Executing query:", query);
+                    const result = await client.query(query);
+                    console.log("Query executed successfully:", result);
+                    return result;
+                }
+                else {
+                    console.log("Executing query:", query, params);
+                    const result = await client.query(query, params);
+                    console.log("Query executed successfully:", result);
+                    return result;
+                }
             }
             catch (error) {
                 console.error("Error executing query:", error);

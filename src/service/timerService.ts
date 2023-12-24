@@ -4,7 +4,6 @@ export default class TimerService {
     private intervalId: NodeJS.Timeout | null = null;
 
     constructor(func: Function) {
-        // Start the interval when the instance is created
         this.func = func;
         this.startInterval();
     }
@@ -16,8 +15,8 @@ export default class TimerService {
         }
 
         // Set a new interval
-        this.intervalId = setInterval(() => {
-            this.func();
+        this.intervalId = setInterval(async () => {
+            await this.func();
             console.log("TimerService: Time is " + this.time + " minutes");
         }, this.time * 60 * 1000);
     }
