@@ -45,7 +45,7 @@ export default class TestService {
         return result;
     }
 
-    public async createTest(): Promise<any> {
+    public async createTest(){
         try {
             const req = {
                 body: {
@@ -84,39 +84,31 @@ export default class TestService {
 
             //creating the test and the sensor matrix instances
             const test = new Test();
-            console.log(req.body.test);
-    
+
             const sens = new SensorMatrix(req.body.test);
-
-
-            console.log(sens);
             
             //saving matrix to db
             const sensorValues = sens.convertToDBFormat();
-            console.log(sensorValues);
 
             const sql = `INSERT INTO term_matrix (
                 sensor_00, sensor_01, sensor_02, sensor_03, sensor_04, sensor_10, sensor_11, sensor_12, sensor_13, sensor_14, sensor_20, sensor_21, sensor_22, sensor_23, sensor_24, tested_at
                 ) VALUES (
                 $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16
                 ) RETURNING id`;
-            console.log('sql: ' + sql + ' values: ' + sensorValues);
-            
+
             const sens_id = await this.dbService.query(sql, sensorValues);
-            console.log('---------');
-            console.log('id: ' + sens_id);
             
             //setting the main elements of the test
-            test.setTestMain(req, sens_id.rows);
+            test.setTestMain(req, sens_id.rows[0][0]);
 
             //saving test to db
             const testValues = test.convertToDBFormat();
             const sql2 = `INSERT INTO tests (
-                temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, test_id, tested_at
+                temp_flow_in, temp_flow_out, temp_out_side, temp_in_side, term_matrix, tested_at
                 ) VALUES (
                 $1, $2, $3, $4, $5, $6
                 )`;
-            const res = await this.dbService.query(sql2, testValues);
+            await this.dbService.query(sql2, testValues);
         }
         catch (error) {
             console.error("Error getting the data:", error);

@@ -37,6 +37,13 @@ export default class DbService {
         }
     }
 
+    public async ping(): Promise<any>{
+        console.log("Pinging the database...");
+        const res = await this.query('SELECT NOW()');
+        console.log("Database pinged successfully:", res);
+        return res;
+    }
+
     public async query(query: string, params?: any[]) {
         try {
             const client = await this.connectToDB();
