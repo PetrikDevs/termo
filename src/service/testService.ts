@@ -10,6 +10,9 @@ export default class TestService {
     public async getLastTest() {
         //getting the last test from the db
         const result = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT 1');
+    
+        console.log('id: ', result.rows[0][6]);
+
         const result2 = await this.dbService.query(`SELECT * FROM term_matrix WHERE id = ?`, [result.rows[0][6]]);
 
         //creating the test instance and loadin' it up
