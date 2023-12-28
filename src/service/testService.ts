@@ -23,7 +23,7 @@ export default class TestService {
 
     public async getAllTests() {
         //getting all the tests from the db
-        const res1 = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC');
+        const res1 = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT 50');
         const test_list: Test[] = [];
 
         //creating the test instances and loadin' 'em up
