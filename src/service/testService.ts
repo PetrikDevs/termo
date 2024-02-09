@@ -52,7 +52,7 @@ export default class TestService {
         try {
             const apiService = new ApiService();
             const req = await apiService.get('/new_test');
-            console.log(req);
+            console.log(req.data);
             //checking if the data is valid
             //console.log("No data from the arduino");
             //return;
@@ -61,7 +61,7 @@ export default class TestService {
 
             const test = new Test();
 
-            const sens = new SensorMatrix(req.body.test);
+            const sens = new SensorMatrix(req.data.body.test);
             
             //saving matrix to db
             const sensorValues = sens.convertToDBFormat();
@@ -75,7 +75,7 @@ export default class TestService {
             const sens_id = await this.dbService.query(sql, sensorValues);
             
             //setting the main elements of the test
-            test.setTestMain(req, sens_id.rows[0][0]);
+            test.setTestMain(req.data, sens_id.rows[0][0]);
 
             //saving test to db
             const testValues = test.convertToDBFormat();
