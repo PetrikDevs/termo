@@ -1,11 +1,12 @@
 import DbService from "./dbService";
 import SensorMatrix from "../model/sensor";
 import Test from "../model/test";
+import ApiService from "./apiService";
 //import ApiService from "./apiService";
 
 export default class TestService {
     public dbService: DbService = new DbService();
-    //private apiService: ApiService = new ApiService();
+    private apiService: ApiService = new ApiService();
 
     public async getLastTest() {
         //getting the last test from the db
@@ -50,42 +51,14 @@ export default class TestService {
 
     public async createTest(){
         try {
-            const req = {
-                body: {
-                    temp_flow_in: 60,
-                    temp_flow_out: 60,
-                    temp_out_side: 60,
-                    temp_in_side: 70,
-                    test: {
-                        sec0: {
-                            sensor0: 1,
-                            sensor1: 2,
-                            sensor2: 3,
-                            sensor3: 4,
-                            sensor4: 5
-                        },
-                        sec1: {
-                            sensor0: 6,
-                            sensor1: 7,
-                            sensor2: 8,
-                            sensor3: 9,
-                            sensor4: 10
-                        },
-                        sec2: {
-                            sensor0: 11,
-                            sensor1: 12,
-                            sensor2: 13,
-                            sensor3: 14,
-                            sensor4: 15
-                        }
-                    }
-                }
-            }
+            const req = await this.apiService.get('/new_test');
+            console.log(req);
             //checking if the data is valid
             //console.log("No data from the arduino");
             //return;
 
             //creating the test and the sensor matrix instances
+
             const test = new Test();
 
             const sens = new SensorMatrix(req.body.test);
