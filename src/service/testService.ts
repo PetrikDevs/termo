@@ -53,7 +53,8 @@ export default class TestService {
             const apiService = new ApiService();
             const req = await apiService.get('/new_test');
             const req_body = req.data;
-            console.log('data?:', req_body.test);
+            console.log('data?:', req_body);
+            console.log('test?:', req_body.test);
             //checking if the data is valid
             //console.log("No data from the arduino");
             //return;
