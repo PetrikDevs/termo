@@ -6,7 +6,6 @@ import ApiService from "./apiService";
 
 export default class TestService {
     public dbService: DbService = new DbService();
-    private apiService: ApiService = new ApiService();
 
     public async getLastTest() {
         //getting the last test from the db
@@ -51,7 +50,8 @@ export default class TestService {
 
     public async createTest(){
         try {
-            const req = await this.apiService.get('/new_test');
+            const apiService = new ApiService();
+            const req = await apiService.get('/new_test');
             console.log(req);
             //checking if the data is valid
             //console.log("No data from the arduino");
