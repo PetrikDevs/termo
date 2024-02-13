@@ -10,10 +10,10 @@ export default class Test {
    }
 
    setTestMain(req: any, id: any) {
-        this.test.temp_flow_in = req.body.temp_flow_in,
-        this.test.temp_flow_out = req.body.temp_flow_out,
-        this.test.temp_out_side = req.body.temp_out_side,
-        this.test.temp_in_side = req.body.temp_in_side,
+        this.test.temp_flow_in = req.temp_flow_in,
+        this.test.temp_flow_out = req.temp_flow_out,
+        this.test.temp_out_side = req.temp_out_side,
+        this.test.temp_in_side = req.temp_in_side,
         this.test.test_id = id
     };
 
