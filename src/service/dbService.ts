@@ -77,7 +77,11 @@ export default class DbService {
         try {
             await this.query(`
             DROP TABLE IF EXISTS tests;
+            `);
+            await this.query(`
             DROP TABLE IF EXISTS term_matrix;
+            `);
+            await this.query(`
             DROP TABLE IF EXISTS tests_oxig;
             `);
             await this.query(`
