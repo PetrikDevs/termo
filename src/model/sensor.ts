@@ -3,6 +3,7 @@ import { SensorMatrixT } from "../types/sensorMatrixT";
 export default class SensorMatrix {
     private sen: SensorMatrixT;
     constructor(matrix: any) {
+        const avg: number = (matrix.sec2.sensor0 + matrix.sec2.sensor1 + matrix.sec2.sensor2 + matrix.sec2.sensor3 + matrix.sec2.sensor4)/ 5;
         this.sen = {
             sec0:{
                 sensor0: matrix.sec0.sensor0,
@@ -21,7 +22,7 @@ export default class SensorMatrix {
             sec2:{
                 sensor0: matrix.sec2.sensor0,
                 sensor1: matrix.sec2.sensor1,
-                sensor2: matrix.sec2.sensor2,
+                sensor2: avg,
                 sensor3: matrix.sec2.sensor3,
                 sensor4: matrix.sec2.sensor4,
             },
