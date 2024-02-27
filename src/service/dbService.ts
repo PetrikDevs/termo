@@ -76,6 +76,11 @@ export default class DbService {
     public init = async () => {
         try {
             await this.query(`
+            DROP TABLE IF EXISTS tests;
+            DROP TABLE IF EXISTS term_matrix;
+            DROP TABLE IF EXISTS tests_oxig;
+            `);
+            await this.query(`
             CREATE TABLE IF NOT EXISTS tests (
                 id SERIAL PRIMARY KEY,
                 temp_flow_in FLOAT NOT NULL,
