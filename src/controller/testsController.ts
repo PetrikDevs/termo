@@ -13,6 +13,7 @@ export default class TestController {
         this.getTestById = this.getTestById.bind(this);
         this.setTimer = this.setTimer.bind(this);
         this.getTimer = this.getTimer.bind(this);
+        this.updatePastTest = this.updatePastTest.bind(this);
     }
 
     public setTimer(req: Request, res: Response) {
