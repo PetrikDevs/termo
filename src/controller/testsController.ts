@@ -28,10 +28,22 @@ export default class TestController {
     public getTimer(req: Request, res: Response) {
       try {
           const time: number = this.timerService.getTime();
+          const past_test: number = this.testService.getPastTest();
           console.log(time);
-          return res.status(200).json({ data: time });
+          return res.status(200).json({ time: time, past_test: past_test });
       } catch (error) {
           console.error("Error trying to get timer", error);
+          res.status(500).json({ error: "Internal Server Error" });
+      }
+  }
+
+    public updatePastTest(req: Request, res: Response) {
+      try {
+          const past_test = req.body.past_test;
+          this.testService.changePastTest(past_test);
+          res.status(200).json({ success: true });
+      } catch (error) {
+          console.error("Error connecting to the database:", error);
           res.status(500).json({ error: "Internal Server Error" });
       }
   }

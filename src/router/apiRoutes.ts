@@ -11,6 +11,8 @@ routerApi.get('/tests_all', testController.getAllTests);
 routerApi.get('/test_last', testController.getLastTest);
 routerApi.get('/tests_main', testController.getAllTestMain);
 routerApi.get('/test/:id', testController.getTestById);
+routerApi.post('/past_test', testController.updatePastTest);
+
 
 //timer
 routerApi.get('/timer', testController.getTimer);

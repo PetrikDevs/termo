@@ -6,6 +6,7 @@ import ApiService from "./apiService";
 
 export default class TestService {
     public dbService: DbService = new DbService();
+    public past_test: number = 20;
 
     public async getLastTest() {
         //getting the last test from the db
@@ -23,7 +24,7 @@ export default class TestService {
 
     public async getAllTests() {
         //getting all the tests from the db
-        const res1 = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT 10');
+        const res1 = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT $1', [this.past_test]);
         const test_list: Test[] = [];
 
         //creating the test instances and loadin' 'em up
@@ -34,6 +35,14 @@ export default class TestService {
             test_list.push(test);
         }
         return test_list;
+    }
+
+    public changePastTest(num: number) {
+        this.past_test = num;
+    }
+
+    public getPastTest() {
+        return this.past_test;
     }
 
     public async getAllMainTests() {
