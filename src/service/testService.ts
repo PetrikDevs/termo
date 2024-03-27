@@ -10,28 +10,25 @@ export default class TestService {
 
     public async getLastTest() {
         //getting the last test from the db
-        const result = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT 1');
+        const result = await this.dbService.query('SELECT * FROM tests JOIN term_matrix ON tests.term_matrix = term_matrix.id ORDER BY tests.tested_at DESC LIMIT 1;');
     
         console.log('id: ', result.rows[0][6]);
 
-        const result2 = await this.dbService.query(`SELECT * FROM term_matrix WHERE id = $1`, [result.rows[0][6]]);
-
         //creating the test instance and loadin' it up
         const test = new Test();
-        test.setSendBack(result.rows[0], result2.rows[0]);
+        test.setSendBack(result.rows[0]);
         return test;
     }
 
     public async getAllTests() {
         //getting all the tests from the db
-        const res1 = await this.dbService.query('SELECT * FROM tests ORDER BY tested_at DESC LIMIT $1', [this.past_test]);
+        const res1 = await this.dbService.query('SELECT * FROM tests JOIN term_matrix ON tests.term_matrix = term_matrix.id ORDER BY tests.tested_at DESC LIMIT $1;', [this.past_test]);
         const test_list: Test[] = [];
 
-        //creating the test instances and loadin' 'em up
+        console.log('res1:', res1.rows);
         for(let i = 0; i < res1.rows.length; i++){
-            const res2 = await this.dbService.query('SELECT * FROM term_matrix WHERE id = $1', [res1.rows[i][6]]);
             const test = new Test();
-            test.setSendBack(res1.rows[i], res2.rows[0]);
+            test.setSendBack(res1.rows[i]);
             test_list.push(test);
         }
         return test_list;
