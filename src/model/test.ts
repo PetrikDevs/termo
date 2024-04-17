@@ -44,7 +44,7 @@ export default class Test {
     for (let i = 0; i < g.length; i++) {
       avg += req1[g[i]];
     }
-    avg = avg / g.length;
+    avg = Math.round(avg / g.length);
 
     console.log("avg:", avg);
 
