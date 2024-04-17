@@ -22,10 +22,12 @@ export default class ValveService {
     }
   }
 
-  public async setValve(valve: Valve): Promise<Valve> {
+  public async setValve(valve: Valve) {
     try {
-      const res = await this.apiService.post("/set_valve", valve);
-      return this.formatValve(res.data.data);
+      console.log("valve:", valve);
+
+      //const res = await this.apiService.post("/set_valve", valve);
+      //console.log(res.data);
     } catch (error) {
       console.error(error);
     }
