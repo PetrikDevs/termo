@@ -46,9 +46,13 @@ export default class Test {
     }
     avg = avg / g.length;
 
+    console.log("avg:", avg);
+
     for (let i = 0; i < w.length; i++) {
       req1[w[i]] = avg;
     }
+
+    console.log("req1:", req1);
 
     return req1;
   }
