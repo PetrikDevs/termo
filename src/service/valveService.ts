@@ -15,8 +15,8 @@ export default class ValveService {
     try {
       const res = await this.apiService.get("/get_valve");
       console.log(res.data);
-      console.log(this.formatValve(res.data.data));
-      return this.formatValve(res.data.data);
+      console.log(this.formatValve(res.data));
+      return this.formatValve(res.data);
     } catch (error) {
       console.error(error);
     }
@@ -24,10 +24,8 @@ export default class ValveService {
 
   public async setValve(valve: Valve) {
     try {
-      console.log("valve:", valve);
-
-      //const res = await this.apiService.post("/set_valve", valve);
-      //console.log(res.data);
+      const res = await this.apiService.post("/set_valve", valve);
+      console.log(res);
     } catch (error) {
       console.error(error);
     }
