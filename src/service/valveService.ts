@@ -14,6 +14,7 @@ export default class ValveService {
   public async getValve(): Promise<Valve> {
     try {
       const res = await this.apiService.get("/get_valve");
+      console.log(res.data);
       console.log(this.formatValve(res.data.data));
       return this.formatValve(res.data.data);
     } catch (error) {
