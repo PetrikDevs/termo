@@ -37,7 +37,7 @@ export default class Test {
       if (req1[i] == -127 || req1[i] == 85) {
         w.push(i);
       } else {
-        g.push();
+        g.push(i);
       }
     }
 
